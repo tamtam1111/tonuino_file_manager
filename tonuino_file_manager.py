@@ -12,7 +12,7 @@ from tkinter.filedialog import askdirectory
 from pathlib import Path
 from mutagen.id3 import ID3
 from track_database import TrackDataBase
-
+from natsort import natsorted
 
 class Window(Frame):
     
@@ -85,7 +85,7 @@ class Window(Frame):
         self.src_dir = Path(askdirectory())
         self.src_dir_entry.delete(0, END)
         self.src_dir_entry.insert(0, str(self.src_dir))
-        self.src_files = list(self.src_dir.glob('*.mp3'))
+        self.src_files = natsorted(list(self.src_dir.glob('*.mp3')))
         self.src_file_list.delete(0, END)
         for idx, file in enumerate(self.src_files):
             self.src_file_list.insert(idx, file.stem)
